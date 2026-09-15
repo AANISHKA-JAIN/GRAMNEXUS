@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GramNexus — Connecting Villages. Creating Possibilities.</title>
+<style>
+:root{--green:#214f3b;--green2:#2f6b4f;--cream:#f7f4ec;--gold:#c9963e;--ink:#203027;--muted:#6c776f;--white:#fff;--line:#e4e6df}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;color:var(--ink);background:var(--cream)}
+header{position:sticky;top:0;z-index:20;background:rgba(247,244,236,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{max-width:1180px;margin:auto;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 22px}
+.logo{font-size:25px;font-weight:800;letter-spacing:-1px;color:var(--green)}.logo span{color:var(--gold)}
+nav button{border:0;background:none;margin-left:20px;color:var(--ink);font-weight:650;cursor:pointer}
+.container{max-width:1180px;margin:auto;padding:0 22px}
+.hero{padding:78px 0 58px;display:grid;grid-template-columns:1.1fr .9fr;gap:45px;align-items:center}
+.eyebrow{text-transform:uppercase;letter-spacing:2px;font-size:12px;font-weight:800;color:var(--green2)}
+h1{font-size:64px;line-height:.98;margin:14px 0 20px;letter-spacing:-3px}
+h2{font-size:34px;letter-spacing:-1.3px;margin:0 0 12px}h3{margin:0 0 8px}
+.lead{font-size:18px;line-height:1.65;color:var(--muted);max-width:650px}
+.searchbox{background:var(--white);border:1px solid var(--line);border-radius:20px;padding:25px;box-shadow:0 15px 45px #233d2b12}
+.searchbox input{width:100%;padding:16px;border:1px solid #d8ddd5;border-radius:12px;font-size:16px;margin:10px 0 12px}
+.btn{background:var(--green);color:white;border:0;border-radius:10px;padding:13px 18px;font-weight:750;cursor:pointer}.btn.secondary{background:#edf1eb;color:var(--green)}
+.section{padding:55px 0}.sectionhead{display:flex;justify-content:space-between;align-items:end;margin-bottom:24px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{background:white;border:1px solid var(--line);border-radius:17px;padding:22px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:25px}.stat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}.stat b{font-size:25px;display:block;color:var(--green)}
+.icon{font-size:27px;margin-bottom:13px}.muted{color:var(--muted);line-height:1.55}
+.badge{display:inline-block;padding:6px 9px;border-radius:20px;font-size:12px;font-weight:800;background:#eef3ed;color:var(--green2)}
+.progress{height:8px;background:#e9ece6;border-radius:20px;overflow:hidden;margin:13px 0}.progress i{display:block;height:100%;background:var(--gold);border-radius:20px}
+.page{display:none}.page.active{display:block}.hidden{display:none}
+.villageHero{background:var(--green);color:white;border-radius:24px;padding:35px;margin-top:35px}.villageHero .muted{color:#d7e3da}
+.back{margin-top:25px;border:0;background:none;color:var(--green);font-weight:800;cursor:pointer}
+.project{display:flex;justify-content:space-between;gap:20px;align-items:center}.project .right{text-align:right;min-width:150px}
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:22px}.step{padding:15px;border-radius:12px;background:#eef2ec;text-align:center;font-size:13px;font-weight:750}.step.done{background:#dce9df;color:var(--green)}
+footer{margin-top:55px;background:#183c2c;color:white;padding:35px 0}.footerin{display:flex;justify-content:space-between}
+.toast{position:fixed;bottom:25px;right:25px;background:#183c2c;color:white;padding:14px 18px;border-radius:12px;display:none;z-index:50}
+@media(max-width:800px){.hero{grid-template-columns:1fr}h1{font-size:48px}.grid,.stats{grid-template-columns:1fr 1fr}.steps{grid-template-columns:1fr 1fr}nav button{margin-left:7px}.project{flex-direction:column;align-items:start}.project .right{text-align:left}}
+</style>
+</head>
+<body>
+<header><div class="nav"><div class="logo">Gram<span>Nexus</span></div><nav>
+<button onclick="showPage('home')">Home</button><button onclick="showPage('villages')">Villages</button><button onclick="showPage('projects')">Projects</button><button onclick="showPage('about')">About</button>
+</nav></div></header>
+
+<main class="container">
+<section id="home" class="page active">
+<div class="hero">
+<div><div class="eyebrow">Rural development • transparency • action</div><h1>Every village has a story. <span style="color:var(--gold)">Let's make it visible.</span></h1>
+<p class="lead">GramNexus connects village information, verified development needs, projects, contributors and progress in one simple digital platform.</p>
+<button class="btn" onclick="showPage('villages')">Explore villages →</button>
+<button class="btn secondary" onclick="showPage('projects')">View projects</button></div>
+<div class="searchbox"><div class="eyebrow">Find a village</div><h3>Start with a village</h3><input id="search" placeholder="Try: Rampur, Rajasthan..." onkeydown="if(event.key==='Enter') searchVillage()"><button class="btn" onclick="searchVillage()">Search village</button><p class="muted" style="font-size:13px">Prototype data shown for demonstration.</p></div>
+</div>
+<div class="section"><div class="sectionhead"><div><div class="eyebrow">What GramNexus connects</div><h2>From information to action.</h2></div></div>
+<div class="grid">
+<div class="card"><div class="icon">🌾</div><h3>Village Profile</h3><p class="muted">Population, education, healthcare, infrastructure, livelihoods and local needs.</p></div>
+<div class="card"><div class="icon">📌</div><h3>Verified Projects</h3><p class="muted">Turn development gaps into clear projects with budgets, milestones and status.</p></div>
+<div class="card"><div class="icon">🤝</div><h3>Connect Support</h3><p class="muted">Bring contributors, NGOs and CSR partners closer to specific village needs.</p></div>
+</div></div>
+<div class="section"><div class="sectionhead"><div><div class="eyebrow">Featured</div><h2>Projects people can understand.</h2></div><button class="btn secondary" onclick="showPage('projects')">See all</button></div>
+<div class="grid" id="homeProjects"></div></div>
+</section>
+
+<section id="villages" class="page">
+<button class="back" onclick="showPage('home')">← Back to home</button>
+<div class="section"><div class="eyebrow">Village directory</div><h2>Explore villages</h2><p class="lead">Each village gets one digital page showing its profile, needs and development journey.</p>
+<div class="grid" id="villageCards"></div></div>
+</section>
+
+<section id="village" class="page">
+<button class="back" onclick="showPage('villages')">← Back to villages</button>
+<div class="villageHero"><div class="eyebrow" style="color:#cfdccf">Village profile</div><h2 id="vName" style="color:white;margin-top:8px">Rampur</h2><p id="vLocation" class="muted">Rajasthan • India</p><div class="stats" id="vStats"></div></div>
+<div class="section"><div class="eyebrow">Village snapshot</div><h2>What is happening here?</h2><div class="grid" id="vInfo"></div></div>
+<div class="section"><div class="sectionhead"><div><div class="eyebrow">Development needs</div><h2>Projects for this village</h2></div></div><div id="vProjects"></div></div>
+</section>
+
+<section id="projects" class="page">
+<div class="section"><div class="eyebrow">Project board</div><h2>Support a specific need</h2><p class="lead">Instead of a general donation request, each requirement becomes a clear, trackable project.</p><div id="allProjects"></div></div>
+</section>
+
+<section id="project" class="page">
+<button class="back" onclick="showPage('projects')">← Back to projects</button>
+<div class="section"><div class="villageHero"><span class="badge" id="pStatus">Verified</span><h2 id="pName" style="color:white;margin-top:14px">Village Library</h2><p id="pVillage" class="muted"></p></div>
+<div class="card" style="margin-top:18px"><div class="sectionhead"><div><div class="eyebrow">Funding</div><h2 id="pMoney">₹80,000 / ₹1,50,000</h2></div><button class="btn" onclick="showToast('Demo: contribution flow opened')">Contribute</button></div><div class="progress"><i id="pBar" style="width:53%"></i></div><p class="muted">Funds are shown as a prototype. In a real platform, payments and disbursement would follow verified processes.</p></div>
+<div class="section"><div class="eyebrow">Project journey</div><h2>Track the progress</h2><div class="steps"><div class="step done">✓ Reported</div><div class="step done">✓ Verified</div><div class="step done">✓ Funded</div><div class="step">In Progress</div><div class="step">Completed</div></div></div>
+<div class="grid"><div class="card"><h3>What is needed?</h3><p class="muted" id="pNeed"></p></div><div class="card"><h3>Why it matters</h3><p class="muted" id="pImpact"></p></div><div class="card"><h3>Transparency</h3><p class="muted">Budget, funding, milestones and completion evidence are designed to remain visible on the project page.</p></div></div>
+</div>
+</section>
+
+<section id="about" class="page"><div class="section"><div class="eyebrow">About the idea</div><h2>Why GramNexus?</h2><p class="lead">Rural information exists in many places, but a citizen-facing layer can connect a village's profile with its verified needs, specific projects, support and visible progress.</p><div class="grid" style="margin-top:25px"><div class="card"><h3>🌱 Impact</h3><p class="muted">Make development needs easier to see and act upon.</p></div><div class="card"><h3>💻 Technology</h3><p class="muted">One platform, thousands of village pages.</p></div><div class="card"><h3>♻️ Sustainability</h3><p class="muted">Long-term vision includes skills, entrepreneurship and waste-to-value initiatives.</p></div></div></div></section>
+</main>
+<footer><div class="container footerin"><div><div class="logo" style="color:white">Gram<span>Nexus</span></div><p style="color:#cbd9cf">Connecting Villages. Creating Possibilities.</p></div><div style="text-align:right">Prototype • Entrepreneurship Essentials<br>© 2026 GramNexus</div></div></footer>
+<div id="toast" class="toast"></div>
+
+<script>
+const villages=[
+{name:"Rampur",loc:"Rajasthan",pop:"2,840",lit:"72%",schools:"3",health:"1",crop:"Wheat & Mustard"},
+{name:"Sundarpur",loc:"Uttar Pradesh",pop:"3,610",lit:"68%",schools:"4",health:"1",crop:"Wheat & Potato"},
+{name:"Devgaon",loc:"Madhya Pradesh",pop:"2,190",lit:"75%",schools:"2",health:"1",crop:"Soybean & Wheat"}
+];
+const projects=[
+{id:1,name:"Village Library",village:"Rampur",need:"Books, shelves, basic furniture and a reading space.",raised:80000,total:150000,status:"Verified",impact:"Create a dedicated learning and reading space for school students."},
+{id:2,name:"Computer Learning Lab",village:"Sundarpur",need:"10 computers, basic networking and digital-learning equipment.",raised:45000,total:200000,status:"Under Verification",impact:"Give students access to basic digital learning and computer skills."},
+{id:3,name:"Water Facility",village:"Devgaon",need:"Community water facility and basic maintenance support.",raised:120000,total:120000,status:"Completed",impact:"Improve access to a reliable community water facility."}
+];
+function showPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo({top:0,behavior:'smooth'})}
+function villageCard(v){return `<div class="card"><span class="badge">${v.loc}</span><h3 style="margin-top:13px">${v.name}</h3><p class="muted">Population ${v.pop} • Literacy ${v.lit}</p><button class="btn secondary" onclick="openVillage('${v.name}')">View village →</button></div>`}
+function projectCard(p){let pct=Math.round(p.raised/p.total*100);return `<div class="card project" style="margin-bottom:14px"><div><span class="badge">${p.status}</span><h3 style="margin-top:11px">${p.name}</h3><p class="muted">${p.village} • ${p.need}</p><div class="progress"><i style="width:${pct}%"></i></div><small>${pct}% funded</small></div><div class="right"><strong>₹${p.raised.toLocaleString('en-IN')}</strong><div class="muted">of ₹${p.total.toLocaleString('en-IN')}</div><button class="btn" style="margin-top:10px" onclick="openProject(${p.id})">View project</button></div></div>`}
+function render(){document.getElementById('villageCards').innerHTML=villages.map(villageCard).join('');document.getElementById('allProjects').innerHTML=projects.map(projectCard).join('');document.getElementById('homeProjects').innerHTML=projects.slice(0,3).map(p=>`<div class="card"><span class="badge">${p.status}</span><h3 style="margin-top:11px">${p.name}</h3><p class="muted">${p.village}</p><div class="progress"><i style="width:${Math.round(p.raised/p.total*100)}%"></i></div><button class="btn secondary" onclick="openProject(${p.id})">Track project →</button></div>`).join('')}
+function openVillage(name){let v=villages.find(x=>x.name===name);showPage('village');document.getElementById('vName').textContent=v.name;document.getElementById('vLocation').textContent=v.loc+' • India';document.getElementById('vStats').innerHTML=`<div class="stat"><b>${v.pop}</b>Population</div><div class="stat"><b>${v.lit}</b>Literacy</div><div class="stat"><b>${v.schools}</b>Schools</div><div class="stat"><b>${v.health}</b>Health centre</div>`;document.getElementById('vInfo').innerHTML=`<div class="card"><h3>🌾 Livelihood</h3><p class="muted">${v.crop}</p></div><div class="card"><h3>💧 Water & electricity</h3><p class="muted">Community facilities and local infrastructure data.</p></div><div class="card"><h3>🛣️ Connectivity</h3><p class="muted">Road and transport connectivity information.</p></div><div class="card"><h3>♻️ Waste</h3><p class="muted">Local waste-management status and development opportunity.</p></div>`;document.getElementById('vProjects').innerHTML=projects.filter(p=>p.village===v.name).map(projectCard).join('')||'<div class="card">No projects listed yet.</div>'}
+function openProject(id){let p=projects.find(x=>x.id===id),pct=Math.round(p.raised/p.total*100);showPage('project');document.getElementById('pStatus').textContent=p.status;document.getElementById('pName').textContent=p.name;document.getElementById('pVillage').textContent=p.village+' • Development Project';document.getElementById('pMoney').textContent=`₹${p.raised.toLocaleString('en-IN')} / ₹${p.total.toLocaleString('en-IN')}`;document.getElementById('pBar').style.width=pct+'%';document.getElementById('pNeed').textContent=p.need;document.getElementById('pImpact').textContent=p.impact}
+function searchVillage(){let q=document.getElementById('search').value.toLowerCase();let v=villages.find(x=>x.name.toLowerCase().includes(q));if(v)openVillage(v.name);else{showPage('villages');showToast('Try Rampur, Sundarpur or Devgaon in this prototype')}}
+function showToast(msg){let t=document.getElementById('toast');t.textContent=msg;t.style.display='block';setTimeout(()=>t.style.display='none',2600)}
+render();
+</script>
+</body>
+</html>
